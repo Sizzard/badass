@@ -5,7 +5,7 @@ RUN apk update && apk add --no-cache \
     iproute2 \
     iputils
 
-# Activating the services bye modifiyng etc/frr/daemons file
+# Activating the services by modifiyng etc/frr/daemons file
 RUN sed -i 's/bgpd=no/bgpd=yes/' /etc/frr/daemons && \
     sed -i 's/ospfd=no/ospfd=yes/' /etc/frr/daemons && \
     sed -i 's/isisd=no/isisd=yes/' /etc/frr/daemons && \

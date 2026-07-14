@@ -5,4 +5,4 @@ RUN apk update && apk add --no-cache \
     iproute2 \
     iputils
 
-CMD ["/bin/sh"]
+CMD ["sh", "-c", "while true; do sleep 1000; done"]
