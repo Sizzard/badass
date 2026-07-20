@@ -1,6 +1,6 @@
 FROM frrouting/frr:v8.4.0
 
-RUN apk update && apk upgrade -y && apk add --no-cache \
+RUN apk update && apk upgrade && apk add --no-cache \
     busybox-extras \
     iproute2 \
     iputils
