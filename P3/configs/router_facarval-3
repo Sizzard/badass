@@ -1,6 +1,6 @@
 frr version 8.0
 frr defaults traditional
-hostname routeur-3
+hostname routeur_facarval-3
 
 router ospf
  network 10.1.1.4/30 area 0
