@@ -1,0 +1,18 @@
+configure terminal
+
+router ospf
+  network 10.1.1.8/30 area 0
+  network 1.1.1.4/32 area 0
+
+router bgp 1
+  bgp router-id 1.1.1.4
+  neighbor 1.1.1.1 remote-as 1
+  neighbor 1.1.1.1 update-source lo
+
+  address-family l2vpn evpn
+    neighbor 1.1.1.1 activate
+    advertise-all-vni
+  exit-address-family
+
+end
+write memory
