@@ -30,4 +30,24 @@
 # ip link set vxlan10 master br0
 # ip link set eth0 master br0
 
-/bin/sh -c "/usr/lib/frr/docker-start & sleep 2 && ip addr add 10.1.1.6/30 dev eth1 && ip addr add 1.1.1.3/32 dev lo && ip link set eth1 up && ip link add vxlan10 type vxlan id 10 dstport 4789 local 1.1.1.3 && ip link set vxlan10 up && ip link add br0 type bridge && ip link set br0 up && ip link set vxlan10 master br0 && ip link set eth0 master br0 && while true; do sleep 1000; done"
+# configure terminal
+
+# router ospf
+#   network 10.1.1.4/30 area 0
+#   network 1.1.1.3/32 area 0
+
+# router bgp 1
+#   bgp router-id 1.1.1.3
+#   neighbor 1.1.1.1 remote-as 1
+#   neighbor 1.1.1.1 update-source lo
+
+#   address-family l2vpn evpn
+#     neighbor 1.1.1.1 activate
+#     advertise-all-vni
+#   exit-address-family
+
+# end
+# write memory
+
+
+/bin/sh -c "/usr/lib/frr/docker-start & sleep 5 && ip addr add 10.1.1.6/30 dev eth1 && ip addr add 1.1.1.3/32 dev lo && ip link set eth1 up && ip link add vxlan10 type vxlan id 10 dstport 4789 local 1.1.1.3 && ip link set vxlan10 up && ip link add br0 type bridge && ip link set br0 up && ip link set vxlan10 master br0 && ip link set eth0 master br0 && vtysh -c 'configure terminal' -c 'router ospf' -c 'network 10.1.1.4/30 area 0' -c 'network 1.1.1.3/32 area 0' -c 'router bgp 1' -c 'bgp router-id 1.1.1.3' -c 'neighbor 1.1.1.1 remote-as 1' -c 'neighbor 1.1.1.1 update-source lo' -c 'address-family l2vpn evpn' -c 'neighbor 1.1.1.1 activate' -c 'advertise-all-vni' -c 'exit-address-family' -c 'end' -c 'write memory' && while true; do sleep 1000; done"
