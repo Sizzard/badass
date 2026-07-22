@@ -1,11 +1,11 @@
 # #!/bin/sh
 
-# # === Interface vers le switch (transport) ===
+# #  Interface vers le switch (transport) 
 # ip addr add 10.1.1.2/30 dev eth0
 # ip link set eth0 up
 
-# # === Création de l'interface VXLAN ===
-# # Remote pointe vers routeur-1 cette fois
+# #  Création de l'interface VXLAN 
+# # On ajoute le router au groupe multi cast 239.1.1.1
 # ip link add vxlan10 type vxlan \
 #     id 10 \
 #     group 239.1.1.1 \
@@ -13,7 +13,7 @@
 #     dev eth0
 # ip link set vxlan10 up
 
-# # === Bridge br0 ===
+# #  Bridge br0 
 # ip link add br0 type bridge
 # ip link set br0 up
 

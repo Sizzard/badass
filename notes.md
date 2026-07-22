@@ -190,3 +190,15 @@ VXLAN
 and forwards the original Ethernet frame.
 
 ## BGP EVPN (RFC 7432)
+
+
+|                               | OSPF                              | BGP EVPN                               |
+| ----------------------------- | --------------------------------- | -------------------------------------- |
+| Layer/purpose                 | Underlay                          | Overlay control plane                  |
+| Knows about                   | Routers and IP networks           | Hosts, MACs, IPs, VTEPs                |
+| Main question                 | "How do I reach that VTEP?"       | "Which VTEP has that host?"            |
+| Used by                       | All routers in the underlay       | RR and VTEPs                           |
+| Example route                 | `10.0.0.3/32 via ...`             | `MAC B → VTEP 10.0.0.3`                |
+| Used for                      | IP connectivity                   | MAC/IP reachability                    |
+| Carries user Ethernet frames? | No                                | No                                     |
+| Enables VXLAN?                | Yes, by providing IP reachability | Yes, by providing endpoint information |
